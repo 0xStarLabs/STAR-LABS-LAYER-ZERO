@@ -28,7 +28,7 @@ export class Okx {
 
     async withdraw() {
         for (const ticker of TICKERS) {
-            if (ticker.name in networks) {
+            if (networks.includes(ticker.name)) {
                 let retry = true;
                 while (retry) {
                     try {
