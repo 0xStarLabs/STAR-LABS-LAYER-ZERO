@@ -134,9 +134,8 @@ npm start
 | OKX_SECRET_KEY | secret key (given when generating an API key) |
 | OKX_PASSPHRASE | account password |
 | amounts | The range of how many coins to withdraw for each network. Can be left as is. With such values, it's enough for about 100 transactions. |
-| maxGasPrice |	The maximum amount of gwei to send transactions in a certain network, if the gas is temporarily inflated in one of the networks it will not consider choosing it until it drops below acceptable values, if it's higher everywhere then it selects a random network and waits. |
-	
- | iterationRange | The range (from and to) of transactions the script will send on each wallet. |
+| maxGasPrice |	The maximum amount of gwei to send transactions in a certain network, if the gas is temporarily inflated in one of the networks it will not consider choosing it until it drops below acceptable values, if it's higher everywhere then it selects a random network and waits. |	
+| iterationRange | The range (from and to) of transactions the script will send on each wallet. |
 | initializationTime |	How many seconds all threads will start. For example, you have 100 accounts, you set 10000 seconds. The bot will start each subsequent account in the interval of 50 - 200 seconds. |
 | pause | The range of seconds of pause between each new transaction in the wallet. |
 | endless_loop | Send messages to the chat endlessly |
