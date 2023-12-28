@@ -39,7 +39,7 @@
 # для работы необходимо установить NodeJS!
 # https://nodejs.org/en/download/current
 
-git clone https://github.com/0xStarLabs/StarLabs-Discord.git
+git clone https://github.com/0xStarLabs/STAR-LABS-LAYER-ZERO.git
 
 cd StarLabs-Discord
 
@@ -104,10 +104,13 @@ npm start
 🟢 Asynchrony and multithreading. Launching all accounts simultaneously with varying start delay times and random intervals between transactions
 
 
-# NodeJS is required for operation!
+## 🚀 Installation
+```
+
+# NodeJS is required!
 # https://nodejs.org/en/download/current
 
-git clone https://github.com/0xStarLabs/StarLabs-Discord.git
+git clone https://github.com/0xStarLabs/STAR-LABS-LAYER-ZERO.git
 
 cd StarLabs-Discord
 
@@ -120,7 +123,7 @@ npm i --save-dev ccxt      (re-download)
 # Before starting, configure the necessary modules in config.ts and /data files
 
 npm start
-
+```
 
 ## ⚙️ Config
 
