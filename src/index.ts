@@ -74,6 +74,7 @@ class Main {
                     const randomTimes = getRandomInt(1, 3);
                     for (let i = 0; i < randomTimes; i++) {
                         await randomApprove(wallet, randomPick.network, walletNumber);
+                        await sleep(30, 60);
                     }
                 }
                 await sleep(pause[0], pause[1]);
