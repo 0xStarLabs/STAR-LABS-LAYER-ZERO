@@ -44,6 +44,7 @@ git clone https://github.com/0xStarLabs/STAR-LABS-LAYER-ZERO.git
 cd StarLabs-Discord
 
 npm i
+npm install -g typescript
 
 если ccxt не установилась с первого раза 
 npm uninstall ccxt          ( удаляем библиотеку )
@@ -115,6 +116,7 @@ git clone https://github.com/0xStarLabs/STAR-LABS-LAYER-ZERO.git
 cd StarLabs-Discord
 
 npm i
+npm install -g typescript
 
 if ccxt did not install on the first try
 npm uninstall ccxt          (remove the library)
