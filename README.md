@@ -12,7 +12,7 @@
 
 💰 DONATION EVM ADDRESS: 0x620ea8b01607efdf3c74994391f86523acf6f9e1
 
-📖 FULL TUTORIAL: https://teletype.in/@izanumi/star_labs_discord
+📖 FULL TUTORIAL: https://teletype.in/@neon_rs/STAR_LABS_LAYER_ZERO
 
 
 ## 🤖 | Функционал:
