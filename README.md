@@ -121,27 +121,30 @@ npm i --save-dev ccxt      (re-download)
 
 npm start
 
-⚙️ Config	
-Name	Description
-protocols	Insert the protocols you want the script to interact with in square brackets. By default, all are enabled; if you want to leave it that way, do not touch anything. There's a reminder of their names above.
-networks	Insert the networks the script used into square brackets. By default, all are enabled; if you want to leave it that way, do not touch anything. There's a reminder of their names above.
-approve	Set either true or false. If true, it will approve random tokens for random protocols for tiny amounts. The idea is not to just send L0 transactions in a row.
-exchange	withdraw: Choose whether to use the exchange in the exchange variable (true / false). If false - will work with what is in the wallet. If true - at startup, it will withdraw native coins in the network where the balance is below the minimum values. (You must have coins on OKEX to withdraw them). Which networks and protocols to work with can also be specified in the config. Link to the full guide below. If you chose true, you also need to fill out
-OKX_API_KEY	API key
-OKX_SECRET_KEY	secret key (given when generating an API key)
-OKX_PASSPHRASE	account password
-amounts	The range of how many coins to withdraw for each network. Can be left as is. With such values, it's enough for about 100 transactions.
-maxGasPrice	The maximum amount of gwei to send transactions in a certain network, if the gas is temporarily inflated in one of the networks it will not consider choosing it until it drops below acceptable values, if it's higher everywhere then it selects a random network and waits.
+
+## ⚙️ Config
+
+| Name | Description |
+| --- | --- |
+| protocols | Insert the protocols you want the script to interact with in square brackets. By default, all are enabled; if you want to leave it that way, do not touch anything. There's a reminder of their names above. |
+| networks | nsert the networks the script used into square brackets. By default, all are enabled; if you want to leave it that way, do not touch anything. There's a reminder of their names above. |
+| approve | Set either true or false. If true, it will approve random tokens for random protocols for tiny amounts. The idea is not to just send L0 transactions in a row. |
+| exchange |Choose whether to use the exchange in the exchange variable (true / false). If false - will work with what is in the wallet. If true - at startup, it will withdraw native coins in the network where the balance is below the minimum values. (You must have coins on OKEX to withdraw them). Which networks and protocols to work with can also be specified in the config. Link to the full guide below. If you chose true, you also need to fill out |
+| OKX_API_KEY |	API key |
+| OKX_SECRET_KEY | secret key (given when generating an API key) |
+| OKX_PASSPHRASE | account password |
+| amounts | The range of how many coins to withdraw for each network. Can be left as is. With such values, it's enough for about 100 transactions. |
+| maxGasPrice |	The maximum amount of gwei to send transactions in a certain network, if the gas is temporarily inflated in one of the networks it will not consider choosing it until it drops below acceptable values, if it's higher everywhere then it selects a random network and waits. |
 	
-iterationRange	The range (from and to) of transactions the script will send on each wallet
-initializationTime	How many seconds all threads will start. For example, you have 100 accounts, you set 10000 seconds. The bot will start each subsequent account in the interval of 50 - 200 seconds.
-pause	The range of seconds of pause between each new transaction in the wallet.
-endless_loop	Send messages to the chat endlessly
-privateKeysRandomMod	Private key randomization mode. shuffle - shuffles each time it starts. order - follows the list from the variable of the same name below, consecutive - just goes in order.
-order	Numbers of private keys by which the script will start, if you choose the order mode in privateKeysRandomMod. For example, you specify 1, 7, 2. The script will first start wallet 1, then wallet 7, then wallet 2.
+ | iterationRange | The range (from and to) of transactions the script will send on each wallet. |
+| initializationTime |	How many seconds all threads will start. For example, you have 100 accounts, you set 10000 seconds. The bot will start each subsequent account in the interval of 50 - 200 seconds. |
+| pause | The range of seconds of pause between each new transaction in the wallet. |
+| endless_loop | Send messages to the chat endlessly |
+| privateKeysRandomMod |Private key randomization mode. shuffle - shuffles each time it starts. order - follows the list from the variable of the same name below, consecutive - just goes in order. |
+| order | Numbers of private keys by which the script will start, if you choose the order mode in privateKeysRandomMod. For example, you specify 1, 7, 2. The script will first start wallet 1, then wallet 7, then wallet 2. |
 
-🗂️ Data
+## 🗂️ Data
 Data in the data folder:
-
-Name	Description
-private_keys.txt	Private keys
+| Name | Description |
+| --- | --- |
+| private_keys.txt |	Private keys |
