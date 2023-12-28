@@ -1,0 +1,16 @@
+{
+  "name": "LayerZero",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "tsc && node ./dist/src/index.js"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "ccxt": "^4.1.100",
+    "ethers": "^5.7.2",
+    "winston": "^3.11.0"
+  }
+}
