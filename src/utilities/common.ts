@@ -3,7 +3,7 @@ import {handleResponse, retry} from "./wrappers.js";
 import fs from "fs";
 import logger from "./logger.js";
 import {ABI, CHAINS, PROVIDERS} from "./constants.js";
-import {getRandomDigital, getRandomInt, getRandomElement, shuffleNumbers} from "./random_utils.js";
+import {getRandomDigital, getRandomElement, getRandomInt, shuffleNumbers} from "./random_utils.js";
 import {Network} from "./interfaces.js";
 import {maxGasPrice, order, privateKeysRandomMod} from "../config.js";
 import path from "path";
@@ -18,7 +18,7 @@ export async function randomApprove(
 
         if (network === "polygon") {
             const maxPriorityFeePerGas = ethers.utils.parseUnits(getRandomDigital(35, 40).toFixed(getRandomInt(5, 8)), "gwei");
-            const currentGasPrice = await PROVIDERS.polygon.getGasPrice();
+            const currentGasPrice = await (await PROVIDERS.polygon).getGasPrice();
             const maxFeePerGas = currentGasPrice.add(maxPriorityFeePerGas);
 
             overrides = {
@@ -29,7 +29,7 @@ export async function randomApprove(
         }
         const platformContractAddress = CHAINS[network].spenders[Math.floor(Math.random() * CHAINS[network].spenders.length)];
         const contractAddress = CHAINS[network].tokens[Math.floor(Math.random() * CHAINS[network].tokens.length)];
-        const contract = (await getContract(contractAddress, ABI.erc20, PROVIDERS[network])).connect(wallet);
+        const contract = (await getContract(contractAddress, ABI.erc20, (await PROVIDERS[network]))).connect(wallet);
         const amount = ethers.BigNumber.from(getRandomInt(1000, 99999));
         const tx: ethers.providers.TransactionResponse = await contract.approve(
             platformContractAddress,
@@ -46,10 +46,10 @@ export async function randomApprove(
 
 export async function checkGas(network: Network, walletNumber: number) {
     return await retry(async () => {
-        let gasPrice = await PROVIDERS[network].getGasPrice();
+        let gasPrice = await (await PROVIDERS[network]).getGasPrice();
         while (gasPrice.gte(ethers.utils.parseUnits(maxGasPrice[network].toString(), 'gwei'))) {
             await new Promise(resolve => setTimeout(resolve, 30 * 1000));
-            gasPrice = await PROVIDERS[network].getGasPrice();
+            gasPrice = await (await PROVIDERS[network]).getGasPrice();
             logger.info(`| ${walletNumber} | Waiting for ${maxGasPrice[network]} gas in ${network}, current: ${ethers.utils.formatUnits(gasPrice, "gwei")}`)
         }
     });
@@ -61,7 +61,7 @@ export async function getOverrides(network: Network): Promise<ethers.PayableOver
 
         if (network === "polygon") {
             const maxPriorityFeePerGas = ethers.utils.parseUnits(getRandomDigital(35, 40).toFixed(getRandomInt(5, 8)), "gwei");
-            const currentGasPrice = await PROVIDERS.polygon.getGasPrice();
+            const currentGasPrice = await (await PROVIDERS.polygon).getGasPrice();
             const maxFeePerGas = currentGasPrice.add(maxPriorityFeePerGas);
 
             newOverrides = {
@@ -70,7 +70,7 @@ export async function getOverrides(network: Network): Promise<ethers.PayableOver
             };
         } else if (network === "moonbeam") {
             newOverrides = {
-                maxFeePerGas: (await PROVIDERS.moonbeam.getGasPrice()).mul(110).div(100),
+                maxFeePerGas: (await (await PROVIDERS.moonbeam).getGasPrice()).mul(110).div(100),
             };
         }
 
@@ -84,6 +84,7 @@ export async function getContract(contractAddress: string, contractABI: string, 
         return new ethers.Contract(contractAddress, contractABI, provider);
     });
 }
+
 
 export async function getRPC(urls: string[]) {
     return await retry(async () => {
@@ -136,34 +137,35 @@ export async function sleep(min: number, max: number): Promise<void> {
 
 export async function getBalance(address: string, network: Network) {
     return await retry(async () => {
-        return Number(ethers.utils.formatEther(await PROVIDERS[network].getBalance(address)))
+        return Number(ethers.utils.formatEther(await (await PROVIDERS[network]).getBalance(address)))
     });
 }
 
 export async function getBalances(address: string) {
     return await retry(async () => {
         return {
-            polygon: Number(ethers.utils.formatEther(await PROVIDERS.polygon.getBalance(address))),
-            celo: Number(ethers.utils.formatEther(await PROVIDERS.celo.getBalance(address))),
-            moonbeam: Number(ethers.utils.formatEther(await PROVIDERS.moonbeam.getBalance(address))),
-            moonriver: Number(ethers.utils.formatEther(await PROVIDERS.moonriver.getBalance(address))),
-            conflux: Number(ethers.utils.formatEther(await PROVIDERS.conflux.getBalance(address))),
-            gnosis: Number(ethers.utils.formatEther(await PROVIDERS.gnosis.getBalance(address))),
-            klaytn: Number(ethers.utils.formatEther(await PROVIDERS.klaytn.getBalance(address))),
+            polygon: Number(ethers.utils.formatEther(await (await PROVIDERS.polygon).getBalance(address))),
+            celo: Number(ethers.utils.formatEther(await (await PROVIDERS.celo).getBalance(address))),
+            moonbeam: Number(ethers.utils.formatEther(await (await PROVIDERS.moonbeam).getBalance(address))),
+            moonriver: Number(ethers.utils.formatEther(await (await PROVIDERS.moonriver).getBalance(address))),
+            conflux: Number(ethers.utils.formatEther(await (await PROVIDERS.conflux).getBalance(address))),
+            gnosis: Number(ethers.utils.formatEther(await (await PROVIDERS.gnosis).getBalance(address))),
+            klaytn: Number(ethers.utils.formatEther(await (await PROVIDERS.klaytn).getBalance(address))),
         }
     });
 }
 
+
 export async function getGasPrices() {
     return await retry(async () => {
         return {
-            polygon: Number(ethers.utils.formatUnits(await PROVIDERS.polygon.getGasPrice(), "gwei")),
-            celo: Number(ethers.utils.formatUnits(await PROVIDERS.celo.getGasPrice(), "gwei")),
-            moonbeam: Number(ethers.utils.formatUnits(await PROVIDERS.moonbeam.getGasPrice(), "gwei")),
-            moonriver: Number(ethers.utils.formatUnits(await PROVIDERS.moonriver.getGasPrice(), "gwei")),
-            conflux: Number(ethers.utils.formatUnits(await PROVIDERS.conflux.getGasPrice(), "gwei")),
-            gnosis: Number(ethers.utils.formatUnits(await PROVIDERS.gnosis.getGasPrice(), "gwei")),
-            klaytn: Number(ethers.utils.formatUnits(await PROVIDERS.klaytn.getGasPrice(), "gwei")),
+            polygon: Number(ethers.utils.formatUnits(await (await PROVIDERS.polygon).getGasPrice(), "gwei")),
+            celo: Number(ethers.utils.formatUnits(await (await PROVIDERS.celo).getGasPrice(), "gwei")),
+            moonbeam: Number(ethers.utils.formatUnits(await (await PROVIDERS.moonbeam).getGasPrice(), "gwei")),
+            moonriver: Number(ethers.utils.formatUnits(await (await PROVIDERS.moonriver).getGasPrice(), "gwei")),
+            conflux: Number(ethers.utils.formatUnits(await (await PROVIDERS.conflux).getGasPrice(), "gwei")),
+            gnosis: Number(ethers.utils.formatUnits(await (await PROVIDERS.gnosis).getGasPrice(), "gwei")),
+            klaytn: Number(ethers.utils.formatUnits(await (await PROVIDERS.klaytn).getGasPrice(), "gwei")),
         }
     });
 }
