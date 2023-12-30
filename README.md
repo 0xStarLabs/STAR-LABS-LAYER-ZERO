@@ -70,7 +70,6 @@ npm start
 | iterationRange | диапазон (от и до) транзакций, которые скрипт будет кидать на каждом кошельке |
 | initializationTime | сколько секунд будут запускаться все потоки. К примеру у вас 100 акков, вы ставите 10000 секунд. Бот будет запускать в работу каждый последующий аккаунт в промежутке 50 - 200 секунд. |
 | pause | диапазон секунд паузы между каждой новый транзакцей у кошелька.  |
-| endless_loop | Отправлять сообщения в чат бесконечно |
 | privateKeysRandomMod | режим рандомизации приватных ключей. shuffle - перемешивает при каждом запуске. order - идет по списку из переменной под таким же названием снизу, consecutive - просто идет по порядку. | 
 | order | Номера приватных ключей по которым будет запускаться скрипт, если вы выберете режим order в privateKeysRandomMod.  К примеру вы указываете 1, 7, 2. Скрипт сначала запустит кошелек 1, потом кошелек 7, потом кошелек 2. |
 
@@ -143,7 +142,6 @@ npm start
 | iterationRange | The range (from and to) of transactions the script will send on each wallet. |
 | initializationTime |	How many seconds all threads will start. For example, you have 100 accounts, you set 10000 seconds. The bot will start each subsequent account in the interval of 50 - 200 seconds. |
 | pause | The range of seconds of pause between each new transaction in the wallet. |
-| endless_loop | Send messages to the chat endlessly |
 | privateKeysRandomMod |Private key randomization mode. shuffle - shuffles each time it starts. order - follows the list from the variable of the same name below, consecutive - just goes in order. |
 | order | Numbers of private keys by which the script will start, if you choose the order mode in privateKeysRandomMod. For example, you specify 1, 7, 2. The script will first start wallet 1, then wallet 7, then wallet 2. |
 
