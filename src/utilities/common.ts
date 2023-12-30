@@ -133,6 +133,12 @@ export async function sleep(min: number, max: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, sleepTime));
 }
 
+export async function getBalance(address: string, network: Network) {
+    return await retry(async () => {
+        return Number(ethers.utils.formatEther(await PROVIDERS[network].getBalance(address)))
+    });
+}
+
 export async function getBalances(address: string) {
     return await retry(async () => {
         return {
@@ -147,7 +153,13 @@ export async function getBalances(address: string) {
     });
 }
 
-export async function getGasPrice() {
+export async function getGasPrice(network: Network) {
+    return await retry(async () => {
+        return Number(ethers.utils.formatUnits(await PROVIDERS[network].getGasPrice(), "gwei"))
+    });
+}
+
+export async function getGasPrices() {
     return await retry(async () => {
         return {
             polygon: Number(ethers.utils.formatUnits(await PROVIDERS.polygon.getGasPrice(), "gwei")),
