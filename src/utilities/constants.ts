@@ -2,17 +2,16 @@ import {getContract, getRPC} from "./common.js";
 import {Chain, Ticker} from "./interfaces.js";
 import {exchange} from "../config.js";
 
-
 export const PROVIDERS = {
-    eth: await getRPC('https://rpc.ankr.com/eth'),
-    era: await getRPC('https://zksync.meowrpc.com'),
-    polygon: await getRPC('https://rpc.ankr.com/polygon'),
-    celo: await getRPC('https://rpc.ankr.com/celo'),
-    moonbeam: await getRPC('https://rpc.ankr.com/moonbeam'),
-    moonriver: await getRPC('https://moonriver.public.blastapi.io'),
-    conflux: await getRPC('https://evm.confluxrpc.com'),
-    gnosis: await getRPC('https://rpc.ankr.com/gnosis'),
-    klaytn: await getRPC('https://rpc.ankr.com/klaytn'),
+    eth: await getRPC(['https://rpc.ankr.com/eth']),
+    era: await getRPC(['https://zksync.meowrpc.com']),
+    polygon: await getRPC(['https://rpc.ankr.com/polygon']),
+    celo: await getRPC(['https://rpc.ankr.com/celo']),
+    moonbeam: await getRPC(['https://rpc.ankr.com/moonbeam']),
+    moonriver: await getRPC(['https://moonriver.public.blastapi.io']),
+    conflux: await getRPC(['https://evm.confluxrpc.com']),
+    gnosis: await getRPC(['https://rpc.ankr.com/gnosis']),
+    klaytn: await getRPC(['https://rpc.ankr.com/klaytn']),
 }
 
 export const TICKERS: Ticker[]  =
