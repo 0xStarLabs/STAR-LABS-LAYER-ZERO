@@ -56,6 +56,9 @@ export async function getRandomNetworkAndProtocol(balances: Balances): Promise<{
     return { network: selectedNetwork, protocol: selectedProtocol };
 }
 
+export const getRandomElement = <T>(array: T[]): T => {
+    return array[Math.floor(Math.random() * array.length)];
+};
 
 export function shuffleNumbers(min: number, max: number): number[] {
     if (min > max) {
