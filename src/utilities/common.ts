@@ -154,12 +154,6 @@ export async function getBalances(address: string) {
     });
 }
 
-export async function getGasPrice(network: Network) {
-    return await retry(async () => {
-        return Number(ethers.utils.formatUnits(await PROVIDERS[network].getGasPrice(), "gwei"))
-    });
-}
-
 export async function getGasPrices() {
     return await retry(async () => {
         return {
