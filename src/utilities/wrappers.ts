@@ -38,8 +38,6 @@ export async function retry<T>(fn: () => Promise<T>, retries = 15, delay = 3000)
         } catch (err: any) {
             lastError = err;
             if (err.code === "NETWORK_ERROR") {
-                // Log no network error and reset the retry counter
-                logger.error('No network detected, retrying indefinitely until network is restored...');
                 networkErrorDetected = true;
                 i = 0; // Reset the retry counter for network errors
             } else {
