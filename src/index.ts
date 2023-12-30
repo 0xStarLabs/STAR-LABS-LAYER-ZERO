@@ -21,7 +21,7 @@ class Main {
 
     }
 
-    async sendRandomTransaction(protocol: Protocol, wallet: ethers.Wallet, network: Network, walletNumber: number) {
+    private async sendRandomTransaction(protocol: Protocol, wallet: ethers.Wallet, network: Network, walletNumber: number) {
         try {
             return await retry(async () => {
                 switch (protocol) {
@@ -50,7 +50,7 @@ class Main {
         }
     }
 
-    async runThread(wallet: ethers.Wallet, walletNumber: number) {
+    private async runThread(wallet: ethers.Wallet, walletNumber: number) {
         logger.info(`| ${walletNumber} | ${wallet.address} - Running thread`);
         let balances: Balances = await getBalances(wallet.address);
 
