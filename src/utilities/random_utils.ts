@@ -1,7 +1,7 @@
 import {CHAINS} from "./constants.js";
 import {Balances, Network, Protocol} from "./interfaces.js";
 import {maxGasPrice, networks, protocols} from "../config.js";
-import {getGasPrice} from "./common.js";
+import {getGasPrices} from "./common.js";
 
 export function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
@@ -18,7 +18,7 @@ export function getRandomDigital(min: number, max: number) {
 
 export async function getRandomNetworkAndProtocol(balances: Balances): Promise<{ network: Network, protocol: Protocol } | null> {
     // Retrieve current gas prices
-    const gasPrices = await getGasPrice();
+    const gasPrices = await getGasPrices();
 
     // Filter networks based on balance and protocol availability
     const eligibleNetworks: Network[] = networks
