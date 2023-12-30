@@ -30,27 +30,17 @@ export async function handleResponse(
 
 export async function retry<T>(fn: () => Promise<T>, retries = 15, delay = 3000): Promise<T> {
     let lastError: Error | null = null;
-    let networkErrorDetected = false;
 
-    for (let i = 0; networkErrorDetected || i < retries; i++) {
+    for (let i = 0; i < retries; i++) {
         try {
             return await fn();
         } catch (err: any) {
             lastError = err;
-            if (err.code === "NETWORK_ERROR") {
-                networkErrorDetected = true;
-                i = 0; // Reset the retry counter for network errors
-            } else {
-                networkErrorDetected = false;
-                if (i >= retries - 1) {
-                    break; // Break the loop if the max retries have been reached for other errors
-                }
+            if (i < retries - 1) {
+                await new Promise((resolve) => setTimeout(resolve, delay));
             }
-            // Wait for the delay before the next retry
-            await new Promise((resolve) => setTimeout(resolve, delay));
         }
     }
-    // After exhausting all retries or if a non-network error occurred
     throw lastError ?? new Error("Retries exhausted with unknown error");
 }
 
