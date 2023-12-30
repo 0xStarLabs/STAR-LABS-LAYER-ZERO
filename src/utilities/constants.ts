@@ -3,8 +3,6 @@ import {Chain, Ticker} from "./interfaces.js";
 import {exchange} from "../config.js";
 
 export const PROVIDERS = {
-    eth: await getRPC(['https://rpc.ankr.com/eth']),
-    era: await getRPC(['https://zksync.meowrpc.com']),
     polygon: await getRPC(['https://rpc.ankr.com/polygon']),
     celo: await getRPC(['https://rpc.ankr.com/celo']),
     moonbeam: await getRPC(['https://rpc.ankr.com/moonbeam']),
