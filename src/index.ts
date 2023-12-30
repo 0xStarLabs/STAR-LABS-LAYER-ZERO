@@ -16,6 +16,7 @@ class Main {
     private readonly privateKeys: string[];
     private readonly notShuffledKeys: string[];
     private readonly accountsOrder: number[]
+    
     constructor() {
         [this.privateKeys, this.notShuffledKeys, this.accountsOrder] = getPrivateKeys();
 
