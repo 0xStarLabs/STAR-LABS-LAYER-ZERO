@@ -85,9 +85,9 @@ export async function getContract(contractAddress: string, contractABI: string, 
     });
 }
 
-export async function getRPC(link: string) {
+export async function getRPC(url: string) {
     return await retry(async () => {
-        return new ethers.providers.JsonRpcProvider(link);
+        return new ethers.providers.JsonRpcProvider({url, timeout: 5000})
     });
 }
 
