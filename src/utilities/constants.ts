@@ -3,15 +3,28 @@ import {Chain, Ticker} from "./interfaces.js";
 import {exchange} from "../config.js";
 
 export const PROVIDERS = {
-    polygon: await getRPC(['https://rpc.ankr.com/polygon']),
-    celo: await getRPC(['https://rpc.ankr.com/celo']),
-    moonbeam: await getRPC(['https://rpc.ankr.com/moonbeam']),
-    moonriver: await getRPC(['https://moonriver.public.blastapi.io']),
-    conflux: await getRPC(['https://evm.confluxrpc.com']),
-    gnosis: await getRPC(['https://rpc.ankr.com/gnosis']),
-    klaytn: await getRPC(['https://rpc.ankr.com/klaytn']),
-}
-
+    get polygon() {
+        return getRPC(['https://rpc.ankr.com/polygon']);
+    },
+    get celo() {
+        return getRPC(['https://rpc.ankr.com/celo']);
+    },
+    get moonbeam() {
+        return getRPC(['https://rpc.ankr.com/moonbeam']);
+    },
+    get moonriver() {
+        return getRPC(['https://moonriver.public.blastapi.io']);
+    },
+    get conflux() {
+        return getRPC(['https://evm.confluxrpc.com']);
+    },
+    get gnosis() {
+        return getRPC(['https://rpc.ankr.com/gnosis']);
+    },
+    get klaytn() {
+        return getRPC(['https://rpc.ankr.com/klaytn']);
+    }
+};
 export const TICKERS: Ticker[]  =
 [
     {
@@ -118,19 +131,19 @@ export const CHAINS: Record<string, Chain> = {
         names: ["merkly", "l2pass", "zerius", "l2telegraph"],
         protocols: {
             merkly: {
-                contract: await getContract(CONTRACT_ADDRESSES.polygon.merkly, ABI.merkly, PROVIDERS.polygon),
+                contract: await getContract(CONTRACT_ADDRESSES.polygon.merkly, ABI.merkly, await PROVIDERS.polygon),
                 dstChains: [125, 126, 167, 177, 115, 150, 145, 196, 230],
             },
             l2pass: {
-                contract: await getContract(CONTRACT_ADDRESSES.polygon.l2pass, ABI.l2pass, PROVIDERS.polygon),
+                contract: await getContract(CONTRACT_ADDRESSES.polygon.l2pass, ABI.l2pass, await PROVIDERS.polygon),
                 dstChains: [150, 116, 145, 126, 125, 177],
             },
             zerius: {
-                contract: await getContract(CONTRACT_ADDRESSES.polygon.zerius, ABI.zerius, PROVIDERS.polygon),
+                contract: await getContract(CONTRACT_ADDRESSES.polygon.zerius, ABI.zerius, await PROVIDERS.polygon),
                 dstChains: [125, 116],
             },
             l2telegraph: {
-                contract: await getContract(CONTRACT_ADDRESSES.polygon.l2telegraph, ABI.l2telegraph, PROVIDERS.polygon),
+                contract: await getContract(CONTRACT_ADDRESSES.polygon.l2telegraph, ABI.l2telegraph, await PROVIDERS.polygon),
                 dstChains: [125, 126, 145, 167, 177, 230],
             },
         },
@@ -152,15 +165,15 @@ export const CHAINS: Record<string, Chain> = {
         names: ["merkly", "l2pass", "l2telegraph"],
         protocols: {
             merkly: {
-                contract: await getContract(CONTRACT_ADDRESSES.celo.merkly, ABI.merkly, PROVIDERS.celo),
+                contract: await getContract(CONTRACT_ADDRESSES.celo.merkly, ABI.merkly, await PROVIDERS.celo),
                 dstChains: [126, 145],
             },
             l2pass: {
-                contract: await getContract(CONTRACT_ADDRESSES.celo.l2pass, ABI.l2pass, PROVIDERS.celo),
+                contract: await getContract(CONTRACT_ADDRESSES.celo.l2pass, ABI.l2pass, await PROVIDERS.celo),
                 dstChains: [126, 145],
             },
             l2telegraph: {
-                contract: await getContract(CONTRACT_ADDRESSES.celo.l2telegraph, ABI.l2telegraph, PROVIDERS.celo),
+                contract: await getContract(CONTRACT_ADDRESSES.celo.l2telegraph, ABI.l2telegraph, await PROVIDERS.celo),
                 dstChains: [126, 145],
             },
         },
@@ -181,11 +194,11 @@ export const CHAINS: Record<string, Chain> = {
         names: ["merkly", "l2pass"],
         protocols: {
             merkly: {
-                contract: await getContract(CONTRACT_ADDRESSES.moonbeam.merkly, ABI.merkly, PROVIDERS.moonbeam),
+                contract: await getContract(CONTRACT_ADDRESSES.moonbeam.merkly, ABI.merkly, await PROVIDERS.moonbeam),
                 dstChains: [115, 125, 116],
             },
             l2pass: {
-                contract: await getContract(CONTRACT_ADDRESSES.moonbeam.l2pass, ABI.l2pass, PROVIDERS.moonbeam),
+                contract: await getContract(CONTRACT_ADDRESSES.moonbeam.l2pass, ABI.l2pass, await PROVIDERS.moonbeam),
                 dstChains: [145, 125, 116],
             },
         },
@@ -204,15 +217,15 @@ export const CHAINS: Record<string, Chain> = {
         names: ["merkly", "l2pass", "l2telegraph"],
         protocols: {
             merkly: {
-                contract: await getContract(CONTRACT_ADDRESSES.moonriver.merkly, ABI.merkly, PROVIDERS.moonriver),
+                contract: await getContract(CONTRACT_ADDRESSES.moonriver.merkly, ABI.merkly, await PROVIDERS.moonriver),
                 dstChains: [177],
             },
             l2pass: {
-                contract: await getContract(CONTRACT_ADDRESSES.moonriver.l2pass, ABI.l2pass, PROVIDERS.moonriver),
+                contract: await getContract(CONTRACT_ADDRESSES.moonriver.l2pass, ABI.l2pass, await PROVIDERS.moonriver),
                 dstChains: [177],
             },
             l2telegraph: {
-                contract: await getContract(CONTRACT_ADDRESSES.moonriver.l2telegraph, ABI.l2telegraph, PROVIDERS.moonriver),
+                contract: await getContract(CONTRACT_ADDRESSES.moonriver.l2telegraph, ABI.l2telegraph, await PROVIDERS.moonriver),
                 dstChains: [177],
             },
         },
@@ -232,7 +245,7 @@ export const CHAINS: Record<string, Chain> = {
         names: ["merkly"],
         protocols: {
             merkly: {
-                contract: await getContract(CONTRACT_ADDRESSES.conflux.merkly, ABI.merkly, PROVIDERS.conflux),
+                contract: await getContract(CONTRACT_ADDRESSES.conflux.merkly, ABI.merkly, await PROVIDERS.conflux),
                 dstChains: [125],
             },
         },
@@ -250,15 +263,15 @@ export const CHAINS: Record<string, Chain> = {
         names: ["merkly", "l2pass", "l2telegraph"],
         protocols: {
             merkly: {
-                contract: await getContract(CONTRACT_ADDRESSES.gnosis.merkly, ABI.merkly, PROVIDERS.gnosis),
+                contract: await getContract(CONTRACT_ADDRESSES.gnosis.merkly, ABI.merkly, await PROVIDERS.gnosis),
                 dstChains: [125, 126, 150],
             },
             l2pass: {
-                contract: await getContract(CONTRACT_ADDRESSES.gnosis.l2pass, ABI.l2pass, PROVIDERS.gnosis),
+                contract: await getContract(CONTRACT_ADDRESSES.gnosis.l2pass, ABI.l2pass, await PROVIDERS.gnosis),
                 dstChains: [125, 150, 126],
             },
             l2telegraph: {
-                contract: await getContract(CONTRACT_ADDRESSES.gnosis.l2telegraph, ABI.l2telegraph, PROVIDERS.gnosis),
+                contract: await getContract(CONTRACT_ADDRESSES.gnosis.l2telegraph, ABI.l2telegraph, await PROVIDERS.gnosis),
                 dstChains: [125, 126, 150],
             },
         },
@@ -277,11 +290,11 @@ export const CHAINS: Record<string, Chain> = {
         names: ["merkly", "l2pass"],
         protocols: {
             merkly: {
-                contract: await getContract(CONTRACT_ADDRESSES.klaytn.merkly, ABI.merkly, PROVIDERS.klaytn),
+                contract: await getContract(CONTRACT_ADDRESSES.klaytn.merkly, ABI.merkly, await PROVIDERS.klaytn),
                 dstChains: [145, 115],
             },
             l2pass: {
-                contract: await getContract(CONTRACT_ADDRESSES.klaytn.l2pass, ABI.l2pass, PROVIDERS.klaytn),
+                contract: await getContract(CONTRACT_ADDRESSES.klaytn.l2pass, ABI.l2pass, await PROVIDERS.klaytn),
                 dstChains: [145],
             },
         },
@@ -306,5 +319,3 @@ export const EXPLORERS = {
 }
 
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
-
-
