@@ -1,7 +1,7 @@
-import ccxt from "ccxt";
+import ccxt from 'ccxt'
 import logger from "../utilities/logger.js";
 import {getRandomDigital, getRandomInt} from "../utilities/random_utils.js";
-import {getBalances, sleep} from "../utilities/common.js";
+import {getBalance, sleep} from "../utilities/common.js";
 import {Balances} from "../utilities/interfaces.js";
 import {CHAINS, TICKERS} from "../utilities/constants.js";
 import {exchange, networks} from "../config.js";
@@ -49,7 +49,7 @@ export class Okx {
 
                         let updatedBalance: number;
                         do {
-                            updatedBalance = Number((await getBalances(this.address))[ticker.name].toFixed(getRandomInt(5, 8)));
+                            updatedBalance = Number((await getBalance(this.address, ticker.name)).toFixed(getRandomInt(5, 8)));
                             await sleep(60, 120);
                         } while (updatedBalance === amountToWithdraw);
 
