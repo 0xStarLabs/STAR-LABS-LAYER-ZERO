@@ -27,6 +27,10 @@ export class Okx {
     }
 
     async withdraw() {
+        for (let i = TICKERS.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [TICKERS[i], TICKERS[j]] = [TICKERS[j], TICKERS[i]];
+        }
         for (const ticker of TICKERS) {
             if (networks.includes(ticker.name)) {
                 let retry = true;
