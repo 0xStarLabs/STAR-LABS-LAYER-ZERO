@@ -3,7 +3,7 @@ import {handleResponse, retry} from "./wrappers.js";
 import fs from "fs";
 import logger from "./logger.js";
 import {ABI, CHAINS, PROVIDERS} from "./constants.js";
-import {getRandomDigital, getRandomInt, shuffleNumbers} from "./random_utils.js";
+import {getRandomDigital, getRandomInt, getRandomElement, shuffleNumbers} from "./random_utils.js";
 import {Network} from "./interfaces.js";
 import {maxGasPrice, order, privateKeysRandomMod} from "../config.js";
 import path from "path";
@@ -85,9 +85,10 @@ export async function getContract(contractAddress: string, contractABI: string, 
     });
 }
 
-export async function getRPC(url: string) {
+export async function getRPC(urls: string[]) {
     return await retry(async () => {
-        return new ethers.providers.JsonRpcProvider({url, timeout: 5000})
+        const url = getRandomElement(urls);
+        return new ethers.providers.JsonRpcProvider({url, timeout: 5000 });
     });
 }
 
