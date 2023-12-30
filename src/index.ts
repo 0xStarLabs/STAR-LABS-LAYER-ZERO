@@ -10,13 +10,13 @@ import {PROVIDERS} from "./utilities/constants.js";
 import {Balances, Network, Protocol} from "./utilities/interfaces.js";
 import {getRandomInt, getRandomNetworkAndProtocol} from "./utilities/random_utils.js";
 import {randomApprove, getBalances, getPrivateKeys, sleep, checkGas} from "./utilities/common.js";
-import {approve, exchange, initializationTime, iterationRange, pause} from "./config.js";
+import {approve, exchange, initializationTime, iterationRange, pause, protocols} from "./config.js";
 
 class Main {
     private readonly privateKeys: string[];
     private readonly notShuffledKeys: string[];
     private readonly accountsOrder: number[]
-    
+
     constructor() {
         [this.privateKeys, this.notShuffledKeys, this.accountsOrder] = getPrivateKeys();
 
@@ -54,7 +54,6 @@ class Main {
     private async runThread(wallet: ethers.Wallet, walletNumber: number) {
         logger.info(`| ${walletNumber} | ${wallet.address} - Running thread`);
         let balances: Balances = await getBalances(wallet.address);
-
         if (exchange.withdraw) {
             const okx = new Okx(wallet.address, balances, walletNumber);
             await okx.withdraw();
@@ -66,11 +65,10 @@ class Main {
             const randomPick: { network: Network; protocol: Protocol } | null = await getRandomNetworkAndProtocol(balances);
 
             if (randomPick !== null) {
-                const provider = PROVIDERS[randomPick.network];
+                const provider = await PROVIDERS[randomPick.network];
                 wallet = wallet.connect(provider);
                 await checkGas(randomPick.network, walletNumber);
                 await this.sendRandomTransaction(randomPick.protocol, wallet, randomPick.network, walletNumber);
-                await sleep(30, 60);
                 if (approve) {
                     const randomTimes = getRandomInt(1, 2);
                     for (let i = 0; i < randomTimes; i++) {
