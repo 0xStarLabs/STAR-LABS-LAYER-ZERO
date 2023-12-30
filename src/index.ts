@@ -72,10 +72,10 @@ class Main {
                 await this.sendRandomTransaction(randomPick.protocol, wallet, randomPick.network, walletNumber);
                 await sleep(30, 60);
                 if (approve) {
-                    const randomTimes = getRandomInt(1, 3);
+                    const randomTimes = getRandomInt(1, 2);
                     for (let i = 0; i < randomTimes; i++) {
+                        await sleep(pause[0] / 10, pause[1] / 10);
                         await randomApprove(wallet, randomPick.network, walletNumber);
-                        await sleep(30, 60);
                     }
                 }
                 await sleep(pause[0], pause[1]);
