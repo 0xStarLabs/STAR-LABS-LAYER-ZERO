@@ -28,7 +28,7 @@ export async function handleResponse(
     });
 }
 
-export async function retry<T>(fn: () => Promise<T>, retries = 15, delay = 10000): Promise<T> {
+export async function retry<T>(fn: () => Promise<T>, retries = 60, delay = 10000): Promise<T> {
     let lastError: Error | null = null;
 
     for (let i = 0; i < retries; i++) {
