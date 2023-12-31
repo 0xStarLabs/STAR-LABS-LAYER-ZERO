@@ -136,36 +136,43 @@ export async function sleep(min: number, max: number): Promise<void> {
 }
 
 export async function getBalance(address: string, network: Network) {
-    return await retry(async () => {
-        return Number(ethers.utils.formatEther(await (await PROVIDERS[network]).getBalance(address)))
-    });
+    try {
+        return await retry(async () => {
+            return Number(ethers.utils.formatEther(await (await PROVIDERS[network]).getBalance(address)))
+        });
+    } catch (error) {
+        console.error("Error getting balance:", error);
+        throw error;
+    }
 }
 
 export async function getBalances(address: string) {
-    return await retry(async () => {
-        return {
-            polygon: Number(ethers.utils.formatEther(await (await PROVIDERS.polygon).getBalance(address))),
-            celo: Number(ethers.utils.formatEther(await (await PROVIDERS.celo).getBalance(address))),
-            moonbeam: Number(ethers.utils.formatEther(await (await PROVIDERS.moonbeam).getBalance(address))),
-            moonriver: Number(ethers.utils.formatEther(await (await PROVIDERS.moonriver).getBalance(address))),
-            conflux: Number(ethers.utils.formatEther(await (await PROVIDERS.conflux).getBalance(address))),
-            gnosis: Number(ethers.utils.formatEther(await (await PROVIDERS.gnosis).getBalance(address))),
-            klaytn: Number(ethers.utils.formatEther(await (await PROVIDERS.klaytn).getBalance(address))),
-        }
-    });
+    try {
+        const balancePromises = Object.entries(PROVIDERS).map(async ([network, provider]) => {
+            const balance = await (await provider).getBalance(address);
+            return { [network]: Number(ethers.utils.formatEther(balance)) };
+        });
+
+        const balances = await Promise.all(balancePromises);
+        return Object.assign({}, ...balances);
+    } catch (error) {
+        console.error("Error getting balances:", error);
+        throw error;
+    }
 }
 
 
 export async function getGasPrices() {
-    return await retry(async () => {
-        return {
-            polygon: Number(ethers.utils.formatUnits(await (await PROVIDERS.polygon).getGasPrice(), "gwei")),
-            celo: Number(ethers.utils.formatUnits(await (await PROVIDERS.celo).getGasPrice(), "gwei")),
-            moonbeam: Number(ethers.utils.formatUnits(await (await PROVIDERS.moonbeam).getGasPrice(), "gwei")),
-            moonriver: Number(ethers.utils.formatUnits(await (await PROVIDERS.moonriver).getGasPrice(), "gwei")),
-            conflux: Number(ethers.utils.formatUnits(await (await PROVIDERS.conflux).getGasPrice(), "gwei")),
-            gnosis: Number(ethers.utils.formatUnits(await (await PROVIDERS.gnosis).getGasPrice(), "gwei")),
-            klaytn: Number(ethers.utils.formatUnits(await (await PROVIDERS.klaytn).getGasPrice(), "gwei")),
-        }
-    });
+    try {
+        const gasPricePromises = Object.entries(PROVIDERS).map(async ([network, provider]) => {
+            const gasPrice = await (await provider).getGasPrice();
+            return { [network]: Number(ethers.utils.formatUnits(gasPrice, "gwei")) };
+        });
+
+        const gasPrices = await Promise.all(gasPricePromises);
+        return Object.assign({}, ...gasPrices);
+    } catch (error) {
+        console.error("Error getting gas prices:", error);
+        throw error;
+    }
 }
