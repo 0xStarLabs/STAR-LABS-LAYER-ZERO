@@ -86,10 +86,18 @@ export async function getContract(contractAddress: string, contractABI: string, 
 }
 
 
-export async function getRPC(urls: string[]) {
-    return await retry(async () => {
-        const url = getRandomElement(urls);
-        return new ethers.providers.JsonRpcProvider({url, timeout: 5000 });
+export async function getRPC(urls: string[], chainName: string, chainId: number) {
+    return retry(async () => {
+        const selectedUrl = urls[Math.floor(Math.random() * urls.length)];
+        return new ethers.providers.JsonRpcProvider({
+            url: selectedUrl,
+            skipFetchSetup: true,
+            timeout: 5000
+        },
+            {
+                name: chainName,
+                chainId: chainId,
+            });
     });
 }
 
