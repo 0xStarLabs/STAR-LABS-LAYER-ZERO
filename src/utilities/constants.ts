@@ -4,27 +4,28 @@ import {exchange} from "../config.js";
 
 export const PROVIDERS = {
     get polygon() {
-        return getRPC(['https://rpc.ankr.com/polygon']);
+        return getRPC(['https://rpc.ankr.com/polygon'], "polygon", 137);
     },
     get celo() {
-        return getRPC(['https://rpc.ankr.com/celo']);
+        return getRPC(['https://rpc.ankr.com/celo'], "celo", 42220);
     },
     get moonbeam() {
-        return getRPC(['https://rpc.ankr.com/moonbeam']);
+        return getRPC(['https://rpc.ankr.com/moonbeam'], "moonbeam", 1284);
     },
     get moonriver() {
-        return getRPC(['https://moonriver.public.blastapi.io']);
+        return getRPC(['https://moonriver.public.blastapi.io'], "moonriver", 1285);
     },
     get conflux() {
-        return getRPC(['https://evm.confluxrpc.com']);
+        return getRPC(['https://evm.confluxrpc.com'], "conflux", 1030);
     },
     get gnosis() {
-        return getRPC(['https://rpc.ankr.com/gnosis']);
+        return getRPC(['https://rpc.ankr.com/gnosis'], "gnosis", 100);
     },
     get klaytn() {
-        return getRPC(['https://rpc.ankr.com/klaytn']);
+        return getRPC(['https://rpc.ankr.com/klaytn'], "klaytn", 8217);
     }
 };
+
 export const TICKERS: Ticker[]  =
 [
     {
