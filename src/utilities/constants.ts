@@ -2,29 +2,40 @@ import {getContract, getRPC} from "./common.js";
 import {Chain, Ticker} from "./interfaces.js";
 import {exchange} from "../config.js";
 
+export const RPC_URLS = {
+    polygon: ['https://rpc.ankr.com/polygon'],
+    celo: ['https://rpc.ankr.com/celo'],
+    moonbeam: ['https://rpc.ankr.com/moonbeam'],
+    moonriver: ['https://moonriver.public.blastapi.io'],
+    conflux: ['https://evm.confluxrpc.com'],
+    gnosis: ['https://rpc.ankr.com/gnosis'],
+    klaytn: ['https://rpc.ankr.com/klaytn'],
+}
+
 export const PROVIDERS = {
     get polygon() {
-        return getRPC(['https://rpc.ankr.com/polygon'], "polygon", 137);
+        return getRPC(RPC_URLS.polygon, "polygon", 137);
     },
     get celo() {
-        return getRPC(['https://rpc.ankr.com/celo'], "celo", 42220);
+        return getRPC(RPC_URLS.celo, "celo", 42220);
     },
     get moonbeam() {
-        return getRPC(['https://rpc.ankr.com/moonbeam'], "moonbeam", 1284);
+        return getRPC(RPC_URLS.moonbeam, "moonbeam", 1284);
     },
     get moonriver() {
-        return getRPC(['https://moonriver.public.blastapi.io'], "moonriver", 1285);
+        return getRPC(RPC_URLS.moonriver, "moonriver", 1285);
     },
     get conflux() {
-        return getRPC(['https://evm.confluxrpc.com'], "conflux", 1030);
+        return getRPC(RPC_URLS.conflux, "conflux", 1030);
     },
     get gnosis() {
-        return getRPC(['https://rpc.ankr.com/gnosis'], "gnosis", 100);
+        return getRPC(RPC_URLS.gnosis, "gnosis", 100);
     },
     get klaytn() {
-        return getRPC(['https://rpc.ankr.com/klaytn'], "klaytn", 8217);
+        return getRPC(RPC_URLS.klaytn, "klaytn", 8217);
     }
 };
+
 
 export const TICKERS: Ticker[]  =
 [
