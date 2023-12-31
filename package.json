@@ -7,7 +7,7 @@
     "start": "tsc && node ./dist/src/index.js"
   },
   "dependencies": {
-    "axios": "^1.6.3",
+    "axios": "^1.6.3"
   },
   "license": "ISC",
   "devDependencies": {
