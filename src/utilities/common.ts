@@ -1,8 +1,9 @@
 import * as ethers from "ethers";
+import axios from 'axios';
 import {handleResponse, retry} from "./wrappers.js";
 import fs from "fs";
 import logger from "./logger.js";
-import {ABI, CHAINS, PROVIDERS} from "./constants.js";
+import {ABI, CHAINS, PROVIDERS, RPC_URLS} from "./constants.js";
 import {getRandomDigital, getRandomElement, getRandomInt, shuffleNumbers} from "./random_utils.js";
 import {Network} from "./interfaces.js";
 import {maxGasPrice, order, privateKeysRandomMod} from "../config.js";
@@ -87,18 +88,22 @@ export async function getContract(contractAddress: string, contractABI: string, 
 
 
 export async function getRPC(urls: string[], chainName: string, chainId: number) {
-    return retry(async () => {
-        const selectedUrl = urls[Math.floor(Math.random() * urls.length)];
-        return new ethers.providers.JsonRpcProvider({
-            url: selectedUrl,
-            skipFetchSetup: true,
-            timeout: 5000
-        },
-            {
+    try {
+        return await retry(async () => {
+            const selectedUrl = urls[Math.floor(Math.random() * urls.length)];
+            return new ethers.providers.JsonRpcProvider({
+                url: selectedUrl,
+                skipFetchSetup: true,
+                timeout: 5000
+            }, {
                 name: chainName,
                 chainId: chainId,
             });
-    });
+        });
+    } catch (error) {
+        console.error(`Error getting rpc: ${chainName}`, error);
+        throw error;
+    }
 }
 
 export function getPrivateKeys(): [string[], string[], number[]] {
@@ -143,28 +148,39 @@ export async function sleep(min: number, max: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, sleepTime));
 }
 
-export async function getBalance(address: string, network: Network) {
+export async function getBalances(address: string) {
     try {
         return await retry(async () => {
-            return Number(ethers.utils.formatEther(await (await PROVIDERS[network]).getBalance(address)))
+            const balancePromises = Object.entries(RPC_URLS).map(async ([network, urls]) => {
+                const balanceInWei = await getBalance(urls[0], address);  // Assuming each network has only one URL
+                const balanceInEther = ethers.utils.formatEther(balanceInWei);
+                return {[network]: Number(balanceInEther)};
+            });
+
+            const balances = await Promise.all(balancePromises);
+            return Object.assign({}, ...balances);
         });
     } catch (error) {
-        console.error("Error getting balance:", error);
+        console.error("Error getting balances:", error);
         throw error;
     }
 }
 
-export async function getBalances(address: string) {
-    try {
-        const balancePromises = Object.entries(PROVIDERS).map(async ([network, provider]) => {
-            const balance = await (await provider).getBalance(address);
-            return { [network]: Number(ethers.utils.formatEther(balance)) };
-        });
+export async function getBalance(url: string, address: string) {
+    const data = {
+        jsonrpc: "2.0",
+        method: "eth_getBalance",
+        params: [address, "latest"],
+        id: 1
+    };
 
-        const balances = await Promise.all(balancePromises);
-        return Object.assign({}, ...balances);
+    try {
+        return await retry(async () => {
+            const response = await axios.post(url, data);
+            return response.data.result;
+        });
     } catch (error) {
-        console.error("Error getting balances:", error);
+        console.error("Error in getBalance:", error);
         throw error;
     }
 }
