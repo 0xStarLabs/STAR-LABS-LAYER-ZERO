@@ -93,9 +93,14 @@ export async function getRPC(urls: string[], chainName: string, chainId: number)
             const selectedUrl = urls[Math.floor(Math.random() * urls.length)];
             return new ethers.providers.JsonRpcProvider({
                 url: selectedUrl,
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
                 skipFetchSetup: true,
-                timeout: 5000
-            }, {
+                timeout: 10000
+            },
+    {
                 name: chainName,
                 chainId: chainId,
             });
