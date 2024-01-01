@@ -5,7 +5,7 @@ import {getBalance, sleep} from "../utilities/common.js";
 import {Balances} from "../utilities/interfaces.js";
 import {CHAINS, RPC_URLS, TICKERS} from "../utilities/constants.js";
 import {exchange, networks} from "../config.js";
-
+import * as ethers from "ethers";
 
 export class Okx {
     private okx: any;
