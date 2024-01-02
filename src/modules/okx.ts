@@ -59,6 +59,7 @@ export class Okx {
                     } catch (error: any) {
                         if (error instanceof ccxt.InsufficientFunds || error['err-code'] === 'dw-insufficient-balance') {
                             logger.error('Insufficient balance, retrying withdrawal');
+                            await sleep(300, 900);
                         } else if (error.code === '58214' || error.message.includes('58214')) {
                             logger.error('Withdrawal suspended due to maintenance. Retrying...');
                             await sleep(300, 900);
