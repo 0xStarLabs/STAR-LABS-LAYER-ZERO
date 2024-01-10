@@ -171,23 +171,10 @@ export async function getBalances(address: string) {
     }
 }
 
-export async function getBalance(url: string, address: string) {
-    const data = {
-        jsonrpc: "2.0",
-        method: "eth_getBalance",
-        params: [address, "latest"],
-        id: 1
-    };
-
-    try {
-        return await retry(async () => {
-            const response = await axios.post(url, data);
-            return response.data.result;
-        });
-    } catch (error) {
-        console.error("Error in getBalance:", error);
-        throw error;
-    }
+export async function getBalance(address: string, network: Network) {
+    return await retry(async () => {
+        return Number(ethers.utils.formatEther(await (await PROVIDERS[network]).getBalance(address)))
+    });
 }
 
 
