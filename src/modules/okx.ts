@@ -49,7 +49,7 @@ export class Okx {
 
                         let updatedBalance: number;
                         do {
-                            updatedBalance = Number(parseFloat(ethers.utils.formatEther(await getBalance(RPC_URLS[ticker.name][0], this.address))).toFixed(getRandomInt(5, 8)));
+                            updatedBalance = Number((await getBalance(this.address, ticker.name)).toFixed(getRandomInt(5, 8)));
                             await sleep(60, 120);
                         } while (updatedBalance.toFixed(5) == this.balances[ticker.name].toFixed(5));
 
