@@ -18,7 +18,7 @@
 ## 🤖 | Функционал:
 🟢  Взаимодействие с протоколами: MERKLY, L2PASS, L2TELEGRAPH, ZERIUS
 
-🟢  Поддержка сурс сетей: Polygon, Celo, Klaytn, Moonriver, Moonbeam, Gnosis, Conflux
+🟢  Поддержка сурс сетей: Polygon, Celo, Klaytn, Moonriver, Moonbeam, Gnosis
 
 🟢  Пополнение балансов через OKX
 
@@ -89,7 +89,7 @@ npm start
 
 🟢 Interaction with protocols: MERKLY, L2PASS, L2TELEGRAPH, ZERIUS
 
-🟢 Support for source networks: Polygon, Celo, Klaytn, Moonriver, Moonbeam, Gnosis, Conflux
+🟢 Support for source networks: Polygon, Celo, Klaytn, Moonriver, Moonbeam, Gnosis
 
 🟢 Account top-up via OKX
 
