@@ -4,8 +4,8 @@ import {Network, privateKeysRandom, Protocol} from "./utilities/interfaces.js";
 // "merkly", "l2pass", "zerius", "l2telegraph"
 export const protocols: Protocol[] = ["merkly", "l2pass", "zerius", "l2telegraph"];
 
-// "polygon", "celo", "moonbeam", "moonriver", "conflux", "gnosis", "klaytn";
-export const networks: Network[] = ["polygon", "celo", "moonbeam", "moonriver", "conflux", "gnosis", "klaytn"];
+// "polygon", "celo", "moonbeam", "moonriver", "gnosis", "klaytn";
+export const networks: Network[] = ["polygon", "celo", "moonbeam", "moonriver", "gnosis", "klaytn"];
 export const approve = true;
 
 export const exchange = {
@@ -20,7 +20,6 @@ export const exchange = {
         celo: [1, 1.3],
         moonbeam: [0.8, 1.2],
         moonriver: [0.02, 0.04],
-        conflux: [1, 1.8],
         klaytn: [1.5, 2],
     }
 }
@@ -31,7 +30,6 @@ export const maxGasPrice = {
     polygon: 300,
     gnosis: 20,
     celo: 20,
-    conflux: 50,
     klaytn: 100,
 }
 export const iterationRange = [5, 10];
