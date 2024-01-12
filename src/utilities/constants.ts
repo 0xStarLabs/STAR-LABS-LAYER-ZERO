@@ -7,7 +7,6 @@ export const RPC_URLS = {
     celo: ['https://rpc.ankr.com/celo'],
     moonbeam: ['https://rpc.ankr.com/moonbeam'],
     moonriver: ['https://moonriver.public.blastapi.io'],
-    conflux: ['https://evm.confluxrpc.com'],
     gnosis: ['https://rpc.ankr.com/gnosis'],
     klaytn: ['https://rpc.ankr.com/klaytn'],
 }
@@ -24,9 +23,6 @@ export const PROVIDERS = {
     },
     get moonriver() {
         return getRPC(RPC_URLS.moonriver, "moonriver", 1285);
-    },
-    get conflux() {
-        return getRPC(RPC_URLS.conflux, "conflux", 1030);
     },
     get gnosis() {
         return getRPC(RPC_URLS.gnosis, "gnosis", 100);
@@ -68,13 +64,6 @@ export const TICKERS: Ticker[]  =
         symbol: "MOVR",
         fee: 0.0001,
         amount: exchange.amounts.moonriver,
-    },
-    {
-        name: 'conflux',
-        network: "CFX_EVM",
-        symbol: "CFX",
-        fee: 1,
-        amount: exchange.amounts.conflux,
     },
     {
         name: 'klaytn',
@@ -119,9 +108,6 @@ const CONTRACT_ADDRESSES = {
         merkly: "0xd379c3D0930d70022B3C6EBA8217e4B990705540",
         l2pass: "0x222228060E7Efbb1D78BB5D454581910e3922222",
         l2telegraph: "0x5B10aE182C297ec76fE6fe0E3Da7c4797ceDE02D",
-    },
-    conflux: {
-        merkly: "0xE47b05F2026a82048caAECf5caE58e5AAE2405eA",
     },
     klaytn: {
         merkly: "0x79DB0f1A83f8e743550EeB5DD5B0B83334F2F083",
@@ -252,24 +238,6 @@ export const CHAINS: Record<string, Chain> = {
         ],
 
     },
-    conflux: {
-        minBalance: 0.4,
-        names: ["merkly"],
-        protocols: {
-            merkly: {
-                contract: await getContract(CONTRACT_ADDRESSES.conflux.merkly, ABI.merkly, await PROVIDERS.conflux),
-                dstChains: [125],
-            },
-        },
-        spenders: [
-            "0x62b0873055Bf896DD869e172119871ac24aEA305",
-        ],
-        tokens: [
-            "0xfe97e85d13abd9c1c33384e796f10b73905637ce", "0xa47f43de2f9623acb395ca4905746496d2014d57",
-            "0x6963efed0ab40f6c3d7bda44a05dcf1437c44372", "0x94bd7a37d2ce24cc597e158facaa8d601083ffec",
-            "0x889138644274a7dc602f25a7e7d53ff40e6d0091", "0x14b2d3bc65e74dae1030eafd8ac30c533c976a9b",
-        ],
-    },
     gnosis: {
         minBalance: 0.0012,
         names: ["merkly", "l2pass", "l2telegraph"],
@@ -325,7 +293,6 @@ export const EXPLORERS = {
     celo: 'https://celoscan.io/tx/',
     moonbeam: 'https://moonscan.io/tx/',
     moonriver: 'https://moonriver.moonscan.io/tx/',
-    conflux: 'https://evm.confluxscan.net/tx/',
     gnosis: 'https://gnosisscan.io/tx/',
     klaytn: 'https://klaytnscope.com/tx/',
 }
