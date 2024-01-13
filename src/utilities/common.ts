@@ -154,21 +154,16 @@ export async function sleep(min: number, max: number): Promise<void> {
 }
 
 export async function getBalances(address: string) {
-    try {
-        return await retry(async () => {
-            const balancePromises = Object.entries(RPC_URLS).map(async ([network, urls]) => {
-                const balanceInWei = await getBalance(urls[0], address);  // Assuming each network has only one URL
-                const balanceInEther = ethers.utils.formatEther(balanceInWei);
-                return {[network]: Number(balanceInEther)};
-            });
-
-            const balances = await Promise.all(balancePromises);
-            return Object.assign({}, ...balances);
-        });
-    } catch (error) {
-        console.error("Error getting balances:", error);
-        throw error;
-    }
+    return await retry(async () => {
+        return {
+            polygon: Number(ethers.utils.formatEther(await (await PROVIDERS.polygon).getBalance(address))),
+            celo: Number(ethers.utils.formatEther(await (await PROVIDERS.celo).getBalance(address))),
+            moonbeam: Number(ethers.utils.formatEther(await (await PROVIDERS.moonbeam).getBalance(address))),
+            moonriver: Number(ethers.utils.formatEther(await (await PROVIDERS.moonriver).getBalance(address))),
+            gnosis: Number(ethers.utils.formatEther(await (await PROVIDERS.gnosis).getBalance(address))),
+            klaytn: Number(ethers.utils.formatEther(await (await PROVIDERS.klaytn).getBalance(address))),
+        }
+    });
 }
 
 export async function getBalance(address: string, network: Network) {
