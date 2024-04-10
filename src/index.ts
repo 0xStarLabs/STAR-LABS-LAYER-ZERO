@@ -11,6 +11,7 @@ import {Balances, Network, Protocol} from "./utilities/interfaces.js";
 import {getRandomInt, getRandomNetworkAndProtocol} from "./utilities/random_utils.js";
 import {randomApprove, getBalances, getPrivateKeys, sleep, checkGas} from "./utilities/common.js";
 import {approve, exchange, initializationTime, iterationRange, pause, protocols} from "./config.js";
+import {GazZip} from "./modules/gaz_zip.js";
 
 class Main {
     private readonly privateKeys: string[];
@@ -41,6 +42,10 @@ class Main {
                     case "l2telegraph":
                         const l2telegraph = new L2Telegraph(wallet, network, walletNumber);
                         await l2telegraph.sendMessage();
+                        break;
+                    case "gazZip":
+                        const gazZip = new GazZip(wallet, network, walletNumber);
+                        await gazZip.refuel();
                         break;
                     default:
                         throw new Error("No protocol chosen");

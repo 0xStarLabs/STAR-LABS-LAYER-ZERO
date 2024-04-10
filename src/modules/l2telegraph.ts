@@ -4,7 +4,7 @@ import {handleResponse, retry} from "../utilities/wrappers.js";
 import logger from "../utilities/logger.js";
 import {CHAINS} from "../utilities/constants.js";
 import {Network} from "../utilities/interfaces.js";
-import {getOverrides} from "../utilities/common.js";
+import {getOverrides, sleep} from "../utilities/common.js";
 
 export class L2Telegraph {
     private readonly wallet: ethers.Wallet;
@@ -57,6 +57,7 @@ export class L2Telegraph {
                     value: swapInfo.value,
                 };
 
+                // error here
                 const tx = await this.contract.sendMessage(
                     swapInfo.message,
                     swapInfo.destChainId,
@@ -65,6 +66,7 @@ export class L2Telegraph {
                 );
 
                 const txResponse = await tx.wait();
+                console.log(txResponse)
                 return await handleResponse(txResponse, this.network, this.walletNumber, "L2TELEGRAPH MESSAGE")
             });
         } catch (error: any) {

@@ -1,7 +1,7 @@
 import {ethers} from "ethers";
 
-export type Network = "polygon" | "moonbeam" | "moonriver" | "celo" | "conflux" | "klaytn" | "gnosis";
-export type Protocol = "zerius" | "merkly" | "l2pass" | "l2telegraph";
+export type Network = "polygon" | "moonbeam" | "moonriver" | "celo" | "klaytn" | "gnosis";
+export type Protocol = "zerius" | "merkly" | "l2pass" | "l2telegraph" | "gazZip";
 export type privateKeysRandom = "shuffle" | "order" | "consecutive";
 
 export interface Balances {
@@ -9,7 +9,6 @@ export interface Balances {
     moonriver: number,
     polygon: number,
     celo: number,
-    conflux: number,
     gnosis: number,
     klaytn: number,
 }

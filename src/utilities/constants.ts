@@ -3,14 +3,14 @@ import {Chain, Ticker} from "./interfaces.js";
 import {exchange} from "../config.js";
 
 export const RPC_URLS = {
-    polygon: ['https://rpc.ankr.com/polygon'],
-    celo: ['https://rpc.ankr.com/celo'],
-    moonbeam: ['https://rpc.ankr.com/moonbeam'],
+    polygon: ['https://rpc.ankr.com/polygon/0d2f0e9eeba02abecd1669512f8aefbbc9806653c49922a03e8dcc4919629053'],
+    celo: ['https://rpc.ankr.com/celo/0d2f0e9eeba02abecd1669512f8aefbbc9806653c49922a03e8dcc4919629053'],
+    moonbeam: ['https://rpc.ankr.com/moonbeam/0d2f0e9eeba02abecd1669512f8aefbbc9806653c49922a03e8dcc4919629053'],
     moonriver: ['https://moonriver.public.blastapi.io'],
-    conflux: ['https://evm.confluxrpc.com'],
-    gnosis: ['https://rpc.ankr.com/gnosis'],
-    klaytn: ['https://rpc.ankr.com/klaytn'],
+    gnosis: ['https://rpc.ankr.com/gnosis/0d2f0e9eeba02abecd1669512f8aefbbc9806653c49922a03e8dcc4919629053'],
+    klaytn: ['https://rpc.ankr.com/klaytn/0d2f0e9eeba02abecd1669512f8aefbbc9806653c49922a03e8dcc4919629053'],
 }
+
 
 export const PROVIDERS = {
     get polygon() {
@@ -24,9 +24,6 @@ export const PROVIDERS = {
     },
     get moonriver() {
         return getRPC(RPC_URLS.moonriver, "moonriver", 1285);
-    },
-    get conflux() {
-        return getRPC(RPC_URLS.conflux, "conflux", 1030);
     },
     get gnosis() {
         return getRPC(RPC_URLS.gnosis, "gnosis", 100);
@@ -70,13 +67,6 @@ export const TICKERS: Ticker[]  =
         amount: exchange.amounts.moonriver,
     },
     {
-        name: 'conflux',
-        network: "CFX_EVM",
-        symbol: "CFX",
-        fee: 1,
-        amount: exchange.amounts.conflux,
-    },
-    {
         name: 'klaytn',
         network: "Klaytn",
         symbol: "KLAY",
@@ -91,7 +81,7 @@ export const ABI = {
     l2pass: '[{"inputs":[{"internalType":"address","name":"lzEndpoint_","type":"address"},{"internalType":"uint256","name":"gasRefuelPrice_","type":"uint256"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"inputs":[{"internalType":"uint16","name":"dstChainId","type":"uint16"},{"internalType":"uint256","name":"nativeForDst","type":"uint256"},{"internalType":"address","name":"addressOnDst","type":"address"},{"internalType":"bool","name":"useZro","type":"bool"}],"name":"estimateGasRefuelFee","outputs":[{"internalType":"uint256","name":"nativeFee","type":"uint256"},{"internalType":"uint256","name":"zroFee","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"dstChainId","type":"uint16"},{"internalType":"address","name":"zroPaymentAddress","type":"address"},{"internalType":"uint256","name":"nativeForDst","type":"uint256"},{"internalType":"address","name":"addressOnDst","type":"address"}],"name":"gasRefuel","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"gasRefuelPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"","type":"uint16"},{"internalType":"bytes","name":"","type":"bytes"},{"internalType":"uint64","name":"","type":"uint64"},{"internalType":"bytes","name":"","type":"bytes"}],"name":"lzReceive","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"gasRefuelPrice_","type":"uint256"}],"name":"setGasRefuelPrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}]',
     zerius: '[{"inputs":[{"internalType":"address","name":"_lzEndpoint","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint16","name":"_srcChainId","type":"uint16"},{"indexed":false,"internalType":"bytes","name":"_srcAddress","type":"bytes"},{"indexed":false,"internalType":"uint64","name":"_nonce","type":"uint64"},{"indexed":false,"internalType":"bytes","name":"_payload","type":"bytes"},{"indexed":false,"internalType":"bytes","name":"_reason","type":"bytes"}],"name":"MessageFailed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint16","name":"_srcChainId","type":"uint16"},{"indexed":false,"internalType":"bytes","name":"_srcAddress","type":"bytes"},{"indexed":false,"internalType":"uint64","name":"_nonce","type":"uint64"},{"indexed":false,"internalType":"bytes32","name":"_payloadHash","type":"bytes32"}],"name":"RetryMessageSuccess","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint16","name":"_dstChainId","type":"uint16"},{"indexed":false,"internalType":"uint16","name":"_type","type":"uint16"},{"indexed":false,"internalType":"uint256","name":"_minDstGas","type":"uint256"}],"name":"SetMinDstGas","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"precrime","type":"address"}],"name":"SetPrecrime","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint16","name":"_remoteChainId","type":"uint16"},{"indexed":false,"internalType":"bytes","name":"_path","type":"bytes"}],"name":"SetTrustedRemote","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint16","name":"_remoteChainId","type":"uint16"},{"indexed":false,"internalType":"bytes","name":"_remoteAddress","type":"bytes"}],"name":"SetTrustedRemoteAddress","type":"event"},{"inputs":[],"name":"DEFAULT_PAYLOAD_SIZE_LIMIT","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"FUNCTION_TYPE_SEND","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"_dstChainId","type":"uint16"},{"internalType":"bytes","name":"payload","type":"bytes"},{"internalType":"bytes","name":"_adapterParams","type":"bytes"}],"name":"estimateSendFee","outputs":[{"internalType":"uint256","name":"nativeFee","type":"uint256"},{"internalType":"uint256","name":"zroFee","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"","type":"uint16"},{"internalType":"bytes","name":"","type":"bytes"},{"internalType":"uint64","name":"","type":"uint64"}],"name":"failedMessages","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"_srcChainId","type":"uint16"},{"internalType":"bytes","name":"_srcAddress","type":"bytes"}],"name":"forceResumeReceive","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint16","name":"_version","type":"uint16"},{"internalType":"uint16","name":"_chainId","type":"uint16"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"_configType","type":"uint256"}],"name":"getConfig","outputs":[{"internalType":"bytes","name":"","type":"bytes"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"_remoteChainId","type":"uint16"}],"name":"getTrustedRemoteAddress","outputs":[{"internalType":"bytes","name":"","type":"bytes"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"_srcChainId","type":"uint16"},{"internalType":"bytes","name":"_srcAddress","type":"bytes"}],"name":"isTrustedRemote","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"lzEndpoint","outputs":[{"internalType":"contract ILayerZeroEndpoint","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"_srcChainId","type":"uint16"},{"internalType":"bytes","name":"_srcAddress","type":"bytes"},{"internalType":"uint64","name":"_nonce","type":"uint64"},{"internalType":"bytes","name":"_payload","type":"bytes"}],"name":"lzReceive","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint16","name":"","type":"uint16"},{"internalType":"uint16","name":"","type":"uint16"}],"name":"minDstGasLookup","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"_srcChainId","type":"uint16"},{"internalType":"bytes","name":"_srcAddress","type":"bytes"},{"internalType":"uint64","name":"_nonce","type":"uint64"},{"internalType":"bytes","name":"_payload","type":"bytes"}],"name":"nonblockingLzReceive","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"","type":"uint16"}],"name":"payloadSizeLimitLookup","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"precrime","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"_dstChainId","type":"uint16"},{"internalType":"bytes","name":"_toAddress","type":"bytes"},{"internalType":"bytes","name":"_adapterParams","type":"bytes"}],"name":"refuel","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint16","name":"_srcChainId","type":"uint16"},{"internalType":"bytes","name":"_srcAddress","type":"bytes"},{"internalType":"uint64","name":"_nonce","type":"uint64"},{"internalType":"bytes","name":"_payload","type":"bytes"}],"name":"retryMessage","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint16","name":"_version","type":"uint16"},{"internalType":"uint16","name":"_chainId","type":"uint16"},{"internalType":"uint256","name":"_configType","type":"uint256"},{"internalType":"bytes","name":"_config","type":"bytes"}],"name":"setConfig","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_fee","type":"uint256"}],"name":"setFee","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint16","name":"_dstChainId","type":"uint16"},{"internalType":"uint16","name":"_packetType","type":"uint16"},{"internalType":"uint256","name":"_minGas","type":"uint256"}],"name":"setMinDstGas","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint16","name":"_dstChainId","type":"uint16"},{"internalType":"uint256","name":"_size","type":"uint256"}],"name":"setPayloadSizeLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_precrime","type":"address"}],"name":"setPrecrime","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint16","name":"_version","type":"uint16"}],"name":"setReceiveVersion","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint16","name":"_version","type":"uint16"}],"name":"setSendVersion","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint16","name":"_remoteChainId","type":"uint16"},{"internalType":"bytes","name":"_path","type":"bytes"}],"name":"setTrustedRemote","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint16","name":"_remoteChainId","type":"uint16"},{"internalType":"bytes","name":"_remoteAddress","type":"bytes"}],"name":"setTrustedRemoteAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint16","name":"","type":"uint16"}],"name":"trustedRemoteLookup","outputs":[{"internalType":"bytes","name":"","type":"bytes"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"payable","type":"function"}]',
     l2telegraph: '[{"inputs":[{"internalType":"address","name":"_endpoint","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"inputs":[],"name":"cost","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"endpoint","outputs":[{"internalType":"contract ILayerZeroEndpoint","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"_dstChainId","type":"uint16"},{"internalType":"address","name":"_userApplication","type":"address"},{"internalType":"bytes","name":"_payload","type":"bytes"},{"internalType":"bool","name":"_payInZRO","type":"bool"},{"internalType":"bytes","name":"_adapterParams","type":"bytes"}],"name":"estimateFees","outputs":[{"internalType":"uint256","name":"nativeFee","type":"uint256"},{"internalType":"uint256","name":"zroFee","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"lastMessage","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint16","name":"_dstChainId","type":"uint16"},{"internalType":"bytes","name":"_from","type":"bytes"},{"internalType":"uint64","name":"","type":"uint64"},{"internalType":"bytes","name":"_payload","type":"bytes"}],"name":"lzReceive","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"message","type":"string"},{"internalType":"uint16","name":"destChainId","type":"uint16"},{"internalType":"bytes","name":"_destination","type":"bytes"}],"name":"sendMessage","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_newCost","type":"uint256"}],"name":"setCost","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"payable","type":"function"}]',
-
+    gazZip: '[{"inputs":[{"internalType":"address","name":"_owner","type":"address"},{"internalType":"address","name":"_endpoint","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"AlreadyInitialized","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256[]","name":"params","type":"uint256[]"},{"indexed":false,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"fee","type":"uint256"},{"indexed":false,"internalType":"address","name":"from","type":"address"}],"name":"SentDeposits","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint32[]","name":"eids","type":"uint32[]"},{"indexed":false,"internalType":"bytes[]","name":"messages","type":"bytes[]"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"fee","type":"uint256"},{"indexed":false,"internalType":"address","name":"from","type":"address"}],"name":"SentMessages","type":"event"},{"inputs":[{"components":[{"internalType":"uint32","name":"srcEid","type":"uint32"},{"internalType":"bytes32","name":"sender","type":"bytes32"},{"internalType":"uint64","name":"nonce","type":"uint64"}],"internalType":"struct Origin","name":"origin","type":"tuple"}],"name":"allowInitializePath","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint32","name":"_dstEid","type":"uint32"},{"internalType":"uint128","name":"_nativeAmount","type":"uint128"},{"internalType":"address","name":"_to","type":"address"}],"name":"createNativeDropOption","outputs":[{"internalType":"bytes","name":"","type":"bytes"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint32","name":"_dstEid","type":"uint32"}],"name":"createReceiveOption","outputs":[{"internalType":"bytes","name":"","type":"bytes"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"defaultGasLimit","outputs":[{"internalType":"uint128","name":"","type":"uint128"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"endpoint","outputs":[{"internalType":"contract ILayerZeroEndpointV2","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint32[]","name":"_dstEids","type":"uint32[]"},{"internalType":"bytes[]","name":"_messages","type":"bytes[]"},{"internalType":"bytes[]","name":"_options","type":"bytes[]"}],"name":"estimateFees","outputs":[{"internalType":"uint256[]","name":"nativeFees","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint32","name":"","type":"uint32"}],"name":"gasLimitLookup","outputs":[{"internalType":"uint128","name":"","type":"uint128"}],"stateMutability":"view","type":"function"},{"inputs":[{"components":[{"internalType":"uint32","name":"srcEid","type":"uint32"},{"internalType":"bytes32","name":"sender","type":"bytes32"},{"internalType":"uint64","name":"nonce","type":"uint64"}],"internalType":"struct Origin","name":"","type":"tuple"},{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"bytes","name":"","type":"bytes"},{"internalType":"address","name":"","type":"address"},{"internalType":"bytes","name":"","type":"bytes"}],"name":"lzReceive","outputs":[],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint32","name":"","type":"uint32"},{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"nextNonce","outputs":[{"internalType":"uint64","name":"nonce","type":"uint64"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint32","name":"","type":"uint32"}],"name":"peers","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint32","name":"_dstEid","type":"uint32"},{"internalType":"bytes","name":"_message","type":"bytes"},{"internalType":"bytes","name":"_options","type":"bytes"}],"name":"quote","outputs":[{"internalType":"uint256","name":"nativeFee","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"_depositParams","type":"uint256[]"},{"internalType":"address","name":"_to","type":"address"}],"name":"sendDeposits","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint32[]","name":"_dstEids","type":"uint32[]"},{"internalType":"bytes[]","name":"_messages","type":"bytes[]"}],"name":"sendMessages","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint128","name":"_defaultGasLimit","type":"uint128"}],"name":"setDefaultGasLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_delegate","type":"address"}],"name":"setDelegate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint32[]","name":"_remoteEids","type":"uint32[]"},{"internalType":"uint128[]","name":"_gasLimits","type":"uint128[]"}],"name":"setGasLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint32[]","name":"_remoteEids","type":"uint32[]"},{"internalType":"bytes32[]","name":"_remoteAddresses","type":"bytes32[]"}],"name":"setPeers","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_lib","type":"address"},{"internalType":"uint64","name":"confirmations","type":"uint64"},{"internalType":"uint32[]","name":"eids","type":"uint32[]"},{"internalType":"address","name":"dvn","type":"address"}],"name":"setUlnConfigs","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]'
 }
 
 const CONTRACT_ADDRESSES = {
@@ -100,32 +90,35 @@ const CONTRACT_ADDRESSES = {
         l2pass: "0x222228060E7Efbb1D78BB5D454581910e3922222",
         zerius: "0x2ef766b59e4603250265EcC468cF38a6a00b84b3",
         l2telegraph: "0x523d5581A0bb8BB2Bc9f23B5202894E31124eA3e",
+        gazZip: "0x26DA582889f59EaaE9dA1f063bE0140CD93E6a4f",
     },
     celo: {
         merkly: "0xC20A842e1Fc2681920C1A190552A2f13C46e7fCF",
         l2pass: "0x222228060e7efbb1d78bb5d454581910e3922222",
         l2telegraph: "0x83017335bae4837016311bdb75df5a320b54d636",
+        gazZip: "0x26DA582889f59EaaE9dA1f063bE0140CD93E6a4f",
     },
     gnosis: {
         merkly: "0x556F119C7433b2232294FB3De267747745A1dAb4",
         l2pass: "0x222228060E7Efbb1D78BB5D454581910e3922222",
         l2telegraph: "0xE266EedB13A69AF15c1756a241021905B1827F6A",
+        gazZip: "0x26DA582889f59EaaE9dA1f063bE0140CD93E6a4f",
     },
     moonbeam: {
         merkly: "0x671861008497782F7108D908D4dF18eBf9598b82",
         l2pass: "0x222228060E7Efbb1D78BB5D454581910e3922222",
+        gazZip: "0x26DA582889f59EaaE9dA1f063bE0140CD93E6a4f",
     },
     moonriver: {
         merkly: "0xd379c3D0930d70022B3C6EBA8217e4B990705540",
         l2pass: "0x222228060E7Efbb1D78BB5D454581910e3922222",
         l2telegraph: "0x5B10aE182C297ec76fE6fe0E3Da7c4797ceDE02D",
-    },
-    conflux: {
-        merkly: "0xE47b05F2026a82048caAECf5caE58e5AAE2405eA",
+        gazZip: "0x26DA582889f59EaaE9dA1f063bE0140CD93E6a4f",
     },
     klaytn: {
         merkly: "0x79DB0f1A83f8e743550EeB5DD5B0B83334F2F083",
         l2pass: "0x222228060E7Efbb1D78BB5D454581910e3922222",
+        gazZip: "0x26DA582889f59EaaE9dA1f063bE0140CD93E6a4f",
     },
 }
 
@@ -140,7 +133,7 @@ export const ZERIUS_REFUEL_CONTRACTS: any = {
 export const CHAINS: Record<string, Chain> = {
     polygon: {
         minBalance: 0.2,
-        names: ["merkly", "l2pass", "zerius", "l2telegraph"],
+        names: ["merkly", "l2pass", "zerius", "l2telegraph", "gazZip"],
         protocols: {
             merkly: {
                 contract: await getContract(CONTRACT_ADDRESSES.polygon.merkly, ABI.merkly, await PROVIDERS.polygon),
@@ -158,6 +151,10 @@ export const CHAINS: Record<string, Chain> = {
                 contract: await getContract(CONTRACT_ADDRESSES.polygon.l2telegraph, ABI.l2telegraph, await PROVIDERS.polygon),
                 dstChains: [125, 126, 145, 167, 177, 230],
             },
+            gazZip: {
+                contract: await getContract(CONTRACT_ADDRESSES.polygon.gazZip, ABI.gazZip, await PROVIDERS.polygon),
+                dstChains: [145, 153, 125, 167, 175, 138, 198, 150, 197, 196],
+            }
         },
         spenders: [
             "0x07e56b727e0EAcFa53823977599905024c2de4F0", "0x643770E279d5D0733F21d6DC03A8efbABf3255B4",
@@ -174,7 +171,7 @@ export const CHAINS: Record<string, Chain> = {
     },
     celo: {
         minBalance: 0.25,
-        names: ["merkly", "l2pass", "l2telegraph"],
+        names: ["merkly", "l2pass", "l2telegraph", "gazZip"],
         protocols: {
             merkly: {
                 contract: await getContract(CONTRACT_ADDRESSES.celo.merkly, ABI.merkly, await PROVIDERS.celo),
@@ -188,6 +185,10 @@ export const CHAINS: Record<string, Chain> = {
                 contract: await getContract(CONTRACT_ADDRESSES.celo.l2telegraph, ABI.l2telegraph, await PROVIDERS.celo),
                 dstChains: [126, 145],
             },
+            gazZip: {
+                contract: await getContract(CONTRACT_ADDRESSES.celo.gazZip, ABI.gazZip, await PROVIDERS.celo),
+                dstChains: [145, 153, 125, 167, 175, 138, 198, 150, 197, 196],
+            }
         },
         spenders: [
             "0x000000000022d473030f116ddee9f6b43ac78ba3", "0xaB235da7f52d35fb4551AfBa11BFB56e18774A65",
@@ -203,7 +204,7 @@ export const CHAINS: Record<string, Chain> = {
     },
     moonbeam: {
         minBalance: 0.3,
-        names: ["merkly", "l2pass"],
+        names: ["merkly", "l2pass", "gazZip"],
         protocols: {
             merkly: {
                 contract: await getContract(CONTRACT_ADDRESSES.moonbeam.merkly, ABI.merkly, await PROVIDERS.moonbeam),
@@ -212,6 +213,10 @@ export const CHAINS: Record<string, Chain> = {
             l2pass: {
                 contract: await getContract(CONTRACT_ADDRESSES.moonbeam.l2pass, ABI.l2pass, await PROVIDERS.moonbeam),
                 dstChains: [145, 125, 116],
+            },
+            gazZip: {
+                contract: await getContract(CONTRACT_ADDRESSES.moonbeam.gazZip, ABI.gazZip, await PROVIDERS.moonbeam),
+                dstChains: [145, 153, 125, 167, 175, 138, 198, 150, 197, 196],
             },
         },
         spenders: [
@@ -226,7 +231,7 @@ export const CHAINS: Record<string, Chain> = {
     },
     moonriver: {
         minBalance: 0.01,
-        names: ["merkly", "l2pass", "l2telegraph"],
+        names: ["merkly", "l2pass", "l2telegraph", "gazZip"],
         protocols: {
             merkly: {
                 contract: await getContract(CONTRACT_ADDRESSES.moonriver.merkly, ABI.merkly, await PROVIDERS.moonriver),
@@ -240,6 +245,10 @@ export const CHAINS: Record<string, Chain> = {
                 contract: await getContract(CONTRACT_ADDRESSES.moonriver.l2telegraph, ABI.l2telegraph, await PROVIDERS.moonriver),
                 dstChains: [177],
             },
+            gazZip: {
+                contract: await getContract(CONTRACT_ADDRESSES.moonriver.gazZip, ABI.gazZip, await PROVIDERS.moonriver),
+                dstChains: [145, 153, 125, 167, 175, 138, 198, 150, 197, 196],
+            },
         },
         spenders: [
             "0x7af71799C40F952237eAA4D81A77C1af49125113", "0xD8FC27ec222E8d5172CD63aC453C6Dfb7467a3C7",
@@ -252,27 +261,9 @@ export const CHAINS: Record<string, Chain> = {
         ],
 
     },
-    conflux: {
-        minBalance: 0.4,
-        names: ["merkly"],
-        protocols: {
-            merkly: {
-                contract: await getContract(CONTRACT_ADDRESSES.conflux.merkly, ABI.merkly, await PROVIDERS.conflux),
-                dstChains: [125],
-            },
-        },
-        spenders: [
-            "0x62b0873055Bf896DD869e172119871ac24aEA305",
-        ],
-        tokens: [
-            "0xfe97e85d13abd9c1c33384e796f10b73905637ce", "0xa47f43de2f9623acb395ca4905746496d2014d57",
-            "0x6963efed0ab40f6c3d7bda44a05dcf1437c44372", "0x94bd7a37d2ce24cc597e158facaa8d601083ffec",
-            "0x889138644274a7dc602f25a7e7d53ff40e6d0091", "0x14b2d3bc65e74dae1030eafd8ac30c533c976a9b",
-        ],
-    },
     gnosis: {
         minBalance: 0.0012,
-        names: ["merkly", "l2pass", "l2telegraph"],
+        names: ["merkly", "l2pass", "l2telegraph", "gazZip"],
         protocols: {
             merkly: {
                 contract: await getContract(CONTRACT_ADDRESSES.gnosis.merkly, ABI.merkly, await PROVIDERS.gnosis),
@@ -285,6 +276,10 @@ export const CHAINS: Record<string, Chain> = {
             l2telegraph: {
                 contract: await getContract(CONTRACT_ADDRESSES.gnosis.l2telegraph, ABI.l2telegraph, await PROVIDERS.gnosis),
                 dstChains: [125, 126, 150],
+            },
+            gazZip: {
+                contract: await getContract(CONTRACT_ADDRESSES.gnosis.gazZip, ABI.gazZip, await PROVIDERS.gnosis),
+                dstChains: [145, 153, 125, 167, 175, 138, 198, 150, 197, 196],
             },
         },
         spenders: [
@@ -299,7 +294,7 @@ export const CHAINS: Record<string, Chain> = {
     },
     klaytn: {
         minBalance: 0.2,
-        names: ["merkly", "l2pass"],
+        names: ["merkly", "l2pass", "gazZip"],
         protocols: {
             merkly: {
                 contract: await getContract(CONTRACT_ADDRESSES.klaytn.merkly, ABI.merkly, await PROVIDERS.klaytn),
@@ -308,6 +303,10 @@ export const CHAINS: Record<string, Chain> = {
             l2pass: {
                 contract: await getContract(CONTRACT_ADDRESSES.klaytn.l2pass, ABI.l2pass, await PROVIDERS.klaytn),
                 dstChains: [145],
+            },
+            gazZip: {
+                contract: await getContract(CONTRACT_ADDRESSES.klaytn.gazZip, ABI.gazZip, await PROVIDERS.klaytn),
+                dstChains: [145, 153, 125, 167, 175, 138, 198, 150, 197, 196],
             },
         },
         spenders: [ "0xe0fbB27D0E7F3a397A67a9d4864D4f4DD7cF8cB9", "0xF7BF3499Df413aC09C4BC8F7521EB4953B5f7bda"],
@@ -325,9 +324,9 @@ export const EXPLORERS = {
     celo: 'https://celoscan.io/tx/',
     moonbeam: 'https://moonscan.io/tx/',
     moonriver: 'https://moonriver.moonscan.io/tx/',
-    conflux: 'https://evm.confluxscan.net/tx/',
     gnosis: 'https://gnosisscan.io/tx/',
     klaytn: 'https://klaytnscope.com/tx/',
 }
 
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
+

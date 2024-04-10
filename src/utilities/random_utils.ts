@@ -21,11 +21,23 @@ export async function getRandomNetworkAndProtocol(balances: Balances): Promise<{
     const gasPrices = await getGasPrices();
 
     // Filter networks based on balance and protocol availability
-    const eligibleNetworks: Network[] = networks
-        .filter(network =>
-            balances[network] > CHAINS[network].minBalance &&
-            CHAINS[network].names.some(name => protocols.includes(name))
-        );
+    const eligibleNetworks: Network[] = [];
+
+// Перебор каждой сети в массиве networks
+    for (const network of networks) {
+        // Получение баланса для текущей сети
+        const balance = balances[network];
+        // Получение минимального баланса для текущей сети из CHAINS
+        const minBalance = CHAINS[network].minBalance;
+        // Получение списка имен для текущей сети из CHAINS
+        const networkNames = CHAINS[network].names;
+
+        // Проверка, что баланс больше минимального и сеть поддерживает хотя бы один протокол
+        if (balance > minBalance && networkNames.some(name => protocols.includes(name))) {
+            // Если условия удовлетворены, добавление сети в список eligibleNetworks
+            eligibleNetworks.push(network);
+        }
+    }
 
     // Return null if no networks are eligible
     if (eligibleNetworks.length === 0) {
