@@ -34,11 +34,16 @@ export class L2Telegraph {
                     [this.contract.address, this.contract.address]
                 );
 
+                const multiplier = Math.random() * (1.3 - 1.2) + 1.2;
+
+                const fees = (await this.contract.estimateFees(dstChainId, this.contract.address, payload, false, adapterParams))[0] * multiplier
+                const feesTotal = ethers.utils.parseUnits(fees.toString(), 'wei');
+
                 const swapInfo = {
                     destChainId: dstChainId,
                     message: message,
                     _destination: trustedRemote,
-                    value: (await this.contract.estimateFees(dstChainId, this.contract.address, payload, false, adapterParams))[0]
+                    value: feesTotal,
                 };
                 return swapInfo;
             });
@@ -66,7 +71,7 @@ export class L2Telegraph {
                 );
 
                 const txResponse = await tx.wait();
-                console.log(txResponse)
+
                 return await handleResponse(txResponse, this.network, this.walletNumber, "L2TELEGRAPH MESSAGE")
             });
         } catch (error: any) {

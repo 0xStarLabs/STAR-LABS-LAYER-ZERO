@@ -2,10 +2,10 @@ import {Network, privateKeysRandom, Protocol} from "./utilities/interfaces.js";
 
 
 // "merkly", "l2pass", "zerius", "l2telegraph", "gazZip"
-export const protocols: Protocol[] = ["gazZip"];
+export const protocols: Protocol[] = ["merkly", "l2pass", "zerius", "l2telegraph", "gazZip"];
 
 // "polygon", "celo", "moonbeam", "moonriver", "conflux", "gnosis", "klaytn";
-export const networks: Network[] = ["celo"];
+export const networks: Network[] = [ "polygon", "celo", "moonbeam", "moonriver", "gnosis", "klaytn"];
 export const approve = false;
 
 export const exchange = {
