@@ -34,9 +34,9 @@ export const maxGasPrice = {
 }
 export const iterationRange = [50, 100];
 
-export const initializationTime = 10;
+export const initializationTime = 10000;
 
-export const pause = [100000, 100005];
+export const pause = [60000, 100005];
 
 // "shuffle", "order", "consecutive",
 export const privateKeysRandomMod: privateKeysRandom = "shuffle";
